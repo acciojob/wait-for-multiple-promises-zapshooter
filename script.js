@@ -15,9 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Global start time
   const start = performance.now();
 
-  // Function to create a promise with random delay between 1 and 3 seconds
-  function createPromise() {
-    const delayMs = Math.random() * 2000 + 1000;
+  // Generate delays ensuring max >= 2000 ms
+  let delays;
+  let maxD;
+  do {
+    delays = Array.from({length: 3}, () => Math.random() * 2000 + 1000);
+    maxD = Math.max(...delays);
+  } while (maxD < 2000);
+
+  // Function to create a promise with given delay
+  function createPromise(delayMs) {
     return new Promise((resolve) => {
       setTimeout(() => {
         const end = performance.now();
@@ -28,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Create three promises
-  const p1 = createPromise();
-  const p2 = createPromise();
-  const p3 = createPromise();
+  const p1 = createPromise(delays[0]);
+  const p2 = createPromise(delays[1]);
+  const p3 = createPromise(delays[2]);
 
   // Use Promise.all to wait for all promises
   Promise.all([p1, p2, p3]).then((times) => {
