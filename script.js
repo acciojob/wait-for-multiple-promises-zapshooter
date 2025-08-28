@@ -1,4 +1,3 @@
-//your JS code here. If required.
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add loading row
   const loadingRow = document.createElement('tr');
+  loadingRow.id = 'loading';
   const loadingCell = document.createElement('td');
   loadingCell.colSpan = 2;
   loadingCell.textContent = 'Loading...';
